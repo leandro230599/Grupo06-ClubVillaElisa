@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %} Login {% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<form action="{{ url_for('auth.authenticate') }}" method="POST">
+    <h1 class="w-25 mx-auto"> Iniciar sesión</h1>
+    <div class="form-outline mb-4 w-25 mx-auto">
+        {{login_form.hidden_tag()}}
+        {{login_form.username.label}}
+        {{login_form.username(class="form-control", placeholder="Ingresa el usuario")}}
+        {% for message in login_form.username.errors %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    <div class="form-outline mb-4 w-25 mx-auto">
+        {{login_form.password.label}}
+        {{login_form.password(class="form-control", placeholder="Ingresa una contraseña")}}
+        {% for message in login_form.password.errors %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    <div class="w-25 mx-auto">
+        <input class="btn btn-primary w-100" type="submit" value="Login" />
+    </div>
+</form>
+{% endblock %}
